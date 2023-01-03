@@ -33,6 +33,10 @@ Keywords: real state, Template, bootstrap template etc.
 /* ===== IMPORT CSS FILE ===== */
 
 /* ===== BANNER START ===== */
+body {
+  background-color: var(--bs-gray-200);
+}
+
 .banner {
 }
 
@@ -59,6 +63,26 @@ Keywords: real state, Template, bootstrap template etc.
 /* ===== BANNER END ===== */
 
 /* ===== START===== */
+.input-todo .form-control {
+  padding: 10px 12px;
+  gap: 10px;
+  background-color: var(--bs-gray-200);
+  box-shadow: none;
+}
+
+.btn {
+  padding: 10px 40px;
+  background: #20eeb0;
+  border-radius: 5px;
+  border: #19d49c;
+}
+
+.btn:hover {
+  padding: 10px 40px;
+  background: #19d49c !important;
+  border-radius: 5px;
+  border: #19d49c;
+}
 /* ===== END===== */
 
 /* ===== START===== */
