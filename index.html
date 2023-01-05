@@ -30,6 +30,9 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css" />
+    <!-- Custom Js -->
+    <script src="js/app.js" defer></script>
+    <!-- Website Title -->
     <title>Home - Real State Company</title>
   </head>
 
@@ -38,7 +41,7 @@
     <section class="">
       <div class="container">
         <div class="row">
-          <div class="col-4 m-auto p-0 m-0">
+          <div class="col-md-4 m-auto p-0 m-0">
             <div class="banner position-relative">
               <img src="./assets/images/banner.png" class="" alt="Banner" />
               <div class="info position-absolute bottom-0 end-0 p-3 text-end">
@@ -55,32 +58,50 @@
     <!-- TO-DO LIST START -->
     <section class="mt-0 pt-0">
       <div class="container">
-        <!-- Input Todo -->
-        <div class="row input-todo">
-          <div class="col-4 m-auto bg-white p-4">
-            <div class="row">
-              <div class="col-9 mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="Note"
-                />
+        <div class="row">
+          <div class="input-todo col-md-4 m-auto bg-white p-4">
+            <!-- Input Field -->
+            <form id="todoForm">
+              <div class="row">
+                <div class="col-md-9 col-9 mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="todoInput"
+                    placeholder="Note"
+                  />
+                </div>
+                <div class="col-md-3 col-3 ms-0 ps-0 text-end">
+                  <button class="btn" type="submit" id="todoInputBtn">
+                    <i class="fa-solid fa-plus text-white"></i>
+                  </button>
+                </div>
               </div>
-              <div class="col-3 ms-0 ps-0 text-end">
-                <button class="btn">
-                  <i class="fa-solid fa-plus text-white"></i>
-                </button>
-              </div>
-            </div>
+            </form>
 
-            <!-- List Todo -->
-            <div class="row mt-3">
-              <div class="col-9">
-                <h4>Dinner</h4>
-                <p>Today at 8:00PM</p>
+            <!--  To-do List -->
+            <div class="row todoLists">
+              <!-- Single Todo -->
+              <div
+                class="todo mt-4 d-flex align-items-center justify-content-between"
+              >
+                <!-- To Do -->
+                <div class="content col-md-8">
+                  <h4 class="mb-0 pb-0 todoText">Dinner</h4>
+                  <p class="mb-0 pb-0 text-muted todoDate">Today at 8:00PM</p>
+                </div>
+                <!-- Icons -->
+                <div
+                  class="icons col-md-4 d-flex gap-4 fs-5 mb-0 pb-0 justify-content-end"
+                >
+                  <i
+                    class="editTodo fa-solid fa-pen-to-square text-success"
+                  ></i>
+                  <i class="deleteTodo fa-solid fa-trash text-danger"></i>
+                </div>
               </div>
-              <div class="col-3"></div>
+
+              <!-- End ToDo List -->
             </div>
           </div>
         </div>

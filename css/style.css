@@ -28,8 +28,8 @@ Keywords: real state, Template, bootstrap template etc.
 /* =================== NEXT CSS FILE =================== */
 
 /* ===== IMPORT CSS FILE ===== */
-@import "./utilities.css";
-@import "./responsive.css";
+@import './utilities.css';
+@import './responsive.css';
 /* ===== IMPORT CSS FILE ===== */
 
 /* ===== BANNER START ===== */
@@ -38,6 +38,7 @@ body {
 }
 
 .banner {
+  border-radius: 10px 10px 0 0;
 }
 
 .banner img {
@@ -45,7 +46,7 @@ body {
 }
 
 .banner .info {
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
   margin-right: 15px;
 }
 
@@ -63,6 +64,10 @@ body {
 /* ===== BANNER END ===== */
 
 /* ===== START===== */
+.input-todo {
+  border-radius: 0 0 10px 10px;
+}
+
 .input-todo .form-control {
   padding: 10px 12px;
   gap: 10px;
@@ -83,15 +88,21 @@ body {
   border-radius: 5px;
   border: #19d49c;
 }
-/* ===== END===== */
 
-/* ===== START===== */
-/* ===== END===== */
+.todoLists .icons {
+  cursor: pointer;
+}
 
-/* ===== START===== */
-/* ===== END===== */
+.todoLists h4 {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}
 
-/* ===== START===== */
+.todoLists p {
+  font-weight: 400;
+  font-size: 14px;
+}
 /* ===== END===== */
 
 /* ===== START===== */
