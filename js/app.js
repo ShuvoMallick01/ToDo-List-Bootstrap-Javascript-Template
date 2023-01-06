@@ -62,4 +62,8 @@ todoForm.addEventListener('submit', (e) => {
   todoActionIcons.appendChild(editTodo);
   todoActionIcons.appendChild(deleteTodo);
   parentTodoElement.appendChild(todoActionIcons);
+
+  deleteTodo.addEventListener('click', () => {
+    todoLists.removeChild(parentTodoElement);
+  });
 });

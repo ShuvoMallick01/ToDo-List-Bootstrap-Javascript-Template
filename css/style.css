@@ -103,6 +103,16 @@ body {
   font-weight: 400;
   font-size: 14px;
 }
+
+.actionIcons i {
+  cursor: pointer;
+  /* transform: scale(0); */
+}
+
+.actionIcons i:hover {
+  transform: scale(1.1);
+  transition: all 300ms ease;
+}
 /* ===== END===== */
 
 /* ===== START===== */
