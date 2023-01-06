@@ -9,11 +9,15 @@ todoForm.addEventListener('submit', (e) => {
   // console.log('Submit Form');
   const todo = todoInput.value;
   // console.log(todo);
+  // if (todo) {
+  //   alert('Successfully Add');
+  // }
   if (!todo) {
     alert('Please fill the todo');
     return;
   }
 
+  // Parent Div Add
   const parentTodoElement = document.createElement('div');
   parentTodoElement.classList.add(
     'todo',
@@ -23,14 +27,16 @@ todoForm.addEventListener('submit', (e) => {
     'justify-content-between'
   );
 
+  // Content Div Add
   const todoContentElement = document.createElement('div');
   todoContentElement.classList.add('content', 'col-md-8');
 
   const todoElement = document.createElement('h4');
   todoElement.classList.add('mb-0', 'pb-0', 'todoText');
+
   todoElement.innerText = todo;
 
-  // let date = 'Today at 8:00PM';
+  // Date Function
   function timeTodo() {
     const time = new Date();
     // return 'Today at ' + time.getHours() + ':' + time.getMinutes();
@@ -42,6 +48,7 @@ todoForm.addEventListener('submit', (e) => {
     return 'Today at ' + todayTime;
   }
 
+  // Date Add
   const todoDate = document.createElement('p');
   todoDate.classList.add('mb-0', 'pb-0', 'text-muted', 'todoDate');
   todoDate.innerText = timeTodo();
@@ -61,7 +68,8 @@ todoForm.addEventListener('submit', (e) => {
     'fs-5',
     'mb-0',
     'pb-0',
-    'justify-content-end'
+    'justify-content-end',
+    'align-items-center'
   );
 
   // edit Elements
@@ -77,16 +85,23 @@ todoForm.addEventListener('submit', (e) => {
   const deleteTodo = document.createElement('i');
   deleteTodo.classList.add('deleteTodo', 'fa-solid', 'fa-trash', 'text-danger');
 
+  // Check Element
+  const checkIcon = document.createElement('input');
+  checkIcon.classList.add('form-check-input', 'mb-1');
+  checkIcon.type = 'checkbox';
+
   todoActionIcons.appendChild(editTodo);
   todoActionIcons.appendChild(deleteTodo);
+  todoActionIcons.appendChild(checkIcon);
   parentTodoElement.appendChild(todoActionIcons);
 
+  // Delete Action
   deleteTodo.addEventListener('click', () => {
     todoLists.removeChild(parentTodoElement);
   });
 
+  // Edit Action
   todoInput.value = '';
-
   editTodo.addEventListener('click', () => {
     if (editTodo.classList.contains('editTodo')) {
       todoInput.value = todoElement.innerText;

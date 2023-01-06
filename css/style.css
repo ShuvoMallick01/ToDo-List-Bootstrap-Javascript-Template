@@ -104,15 +104,22 @@ body {
   font-size: 14px;
 }
 
-.actionIcons i {
+.actionIcons i,
+input {
   cursor: pointer;
   /* transform: scale(0); */
 }
 
-.actionIcons i:hover {
-  transform: scale(1.1);
+.actionIcons i:hover,
+input[type='checkbox']:hover {
+  transform: scale(1.15);
   transition: all 300ms ease;
 }
+
+.actionIcons input.checkbox {
+  width: 20px;
+}
+
 /* ===== END===== */
 
 /* ===== START===== */
