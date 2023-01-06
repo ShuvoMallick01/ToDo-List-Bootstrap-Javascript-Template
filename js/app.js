@@ -16,8 +16,8 @@ todoForm.addEventListener('submit', (e) => {
     return;
   }
 
-  const todoElement = document.createElement('div');
-  todoElement.classList.add(
+  const parentTodoElement = document.createElement('div');
+  parentTodoElement.classList.add(
     'todo',
     'mt-4',
     'd-flex',
@@ -32,7 +32,34 @@ todoForm.addEventListener('submit', (e) => {
   todoHeadingElement.classList.add('mb-0', 'pb-0', 'todoText');
   todoHeadingElement.innerText = todo;
 
+  parentTodoElement.appendChild(todoContentElement);
   todoContentElement.appendChild(todoHeadingElement);
-  todoElement.appendChild(todoContentElement);
-  todoLists.appendChild(todoElement);
+  todoLists.appendChild(parentTodoElement);
+
+  const todoActionIcons = document.createElement('div');
+  todoActionIcons.classList.add(
+    'actionIcons',
+    'col-md-4',
+    'd-flex',
+    'gap-4',
+    'fs-5',
+    'mb-0',
+    'pb-0',
+    'justify-content-end'
+  );
+
+  const editTodo = document.createElement('i');
+  editTodo.classList.add(
+    'editTodo',
+    'fa-solid',
+    'fa-pen-to-square',
+    'text-success'
+  );
+
+  const deleteTodo = document.createElement('i');
+  deleteTodo.classList.add('deleteTodo', 'fa-solid', 'fa-trash', 'text-danger');
+
+  todoActionIcons.appendChild(editTodo);
+  todoActionIcons.appendChild(deleteTodo);
+  parentTodoElement.appendChild(todoActionIcons);
 });
