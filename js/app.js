@@ -4,8 +4,6 @@ const todoInput = document.querySelector('#todoInput');
 const todoLists = document.querySelector('.todoLists');
 
 // console.log(todoForm);
-// console.log(todoInput);
-// console.log(todo);
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
   // console.log('Submit Form');
@@ -28,14 +26,15 @@ todoForm.addEventListener('submit', (e) => {
   const todoContentElement = document.createElement('div');
   todoContentElement.classList.add('content', 'col-md-8');
 
-  const todoHeadingElement = document.createElement('h4');
-  todoHeadingElement.classList.add('mb-0', 'pb-0', 'todoText');
-  todoHeadingElement.innerText = todo;
+  const todoElement = document.createElement('h4');
+  todoElement.classList.add('mb-0', 'pb-0', 'todoText');
+  todoElement.innerText = todo;
 
   parentTodoElement.appendChild(todoContentElement);
-  todoContentElement.appendChild(todoHeadingElement);
+  todoContentElement.appendChild(todoElement);
   todoLists.appendChild(parentTodoElement);
 
+  // icons Element
   const todoActionIcons = document.createElement('div');
   todoActionIcons.classList.add(
     'actionIcons',
@@ -48,6 +47,7 @@ todoForm.addEventListener('submit', (e) => {
     'justify-content-end'
   );
 
+  // edit Elements
   const editTodo = document.createElement('i');
   editTodo.classList.add(
     'editTodo',
@@ -56,6 +56,7 @@ todoForm.addEventListener('submit', (e) => {
     'text-success'
   );
 
+  // Delete Elements
   const deleteTodo = document.createElement('i');
   deleteTodo.classList.add('deleteTodo', 'fa-solid', 'fa-trash', 'text-danger');
 
@@ -65,5 +66,15 @@ todoForm.addEventListener('submit', (e) => {
 
   deleteTodo.addEventListener('click', () => {
     todoLists.removeChild(parentTodoElement);
+  });
+
+  todoInput.value = '';
+
+  editTodo.addEventListener('click', () => {
+    if (editTodo.classList.contains('editTodo')) {
+      todoInput.value = todoElement.innerText;
+      todoLists.removeChild(parentTodoElement);
+      return;
+    }
   });
 });
