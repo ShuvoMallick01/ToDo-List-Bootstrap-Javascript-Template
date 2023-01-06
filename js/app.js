@@ -30,8 +30,25 @@ todoForm.addEventListener('submit', (e) => {
   todoElement.classList.add('mb-0', 'pb-0', 'todoText');
   todoElement.innerText = todo;
 
+  // let date = 'Today at 8:00PM';
+  function timeTodo() {
+    const time = new Date();
+    // return 'Today at ' + time.getHours() + ':' + time.getMinutes();
+    let todayTime = time.toLocaleString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    return 'Today at ' + todayTime;
+  }
+
+  const todoDate = document.createElement('p');
+  todoDate.classList.add('mb-0', 'pb-0', 'text-muted', 'todoDate');
+  todoDate.innerText = timeTodo();
+
   parentTodoElement.appendChild(todoContentElement);
   todoContentElement.appendChild(todoElement);
+  todoContentElement.appendChild(todoDate);
   todoLists.appendChild(parentTodoElement);
 
   // icons Element
