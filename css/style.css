@@ -105,7 +105,7 @@ body {
 }
 
 .actionIcons i,
-input {
+input[type='checkbox'] {
   cursor: pointer;
   /* transform: scale(0); */
 }
@@ -114,6 +114,7 @@ input {
 input[type='checkbox']:hover {
   transform: scale(1.15);
   transition: all 300ms ease;
+  box-shadow: none;
 }
 
 .actionIcons input.checkbox {

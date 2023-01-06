@@ -31,9 +31,9 @@ todoForm.addEventListener('submit', (e) => {
   const todoContentElement = document.createElement('div');
   todoContentElement.classList.add('content', 'col-md-8');
 
+  // To do Div Add
   const todoElement = document.createElement('h4');
   todoElement.classList.add('mb-0', 'pb-0', 'todoText');
-
   todoElement.innerText = todo;
 
   // Date Function
@@ -86,13 +86,13 @@ todoForm.addEventListener('submit', (e) => {
   deleteTodo.classList.add('deleteTodo', 'fa-solid', 'fa-trash', 'text-danger');
 
   // Check Element
-  const checkIcon = document.createElement('input');
-  checkIcon.classList.add('form-check-input', 'mb-1');
-  checkIcon.type = 'checkbox';
+  const checkTodo = document.createElement('input');
+  checkTodo.classList.add('form-check-input', 'mb-1');
+  checkTodo.type = 'checkbox';
 
   todoActionIcons.appendChild(editTodo);
   todoActionIcons.appendChild(deleteTodo);
-  todoActionIcons.appendChild(checkIcon);
+  todoActionIcons.appendChild(checkTodo);
   parentTodoElement.appendChild(todoActionIcons);
 
   // Delete Action
@@ -107,6 +107,14 @@ todoForm.addEventListener('submit', (e) => {
       todoInput.value = todoElement.innerText;
       todoLists.removeChild(parentTodoElement);
       return;
+    }
+  });
+
+  // Check Action
+  checkTodo.addEventListener('click', () => {
+    if (checkTodo.classList.contains('form-check-input')) {
+      todoElement.classList.add('text-decoration-line-through');
+      // console.log('Complete');
     }
   });
 });
