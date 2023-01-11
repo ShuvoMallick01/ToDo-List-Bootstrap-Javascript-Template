@@ -1,10 +1,10 @@
 /* 
 
-Template: Real State Website
+Template: Todo List
 Author: Shuvo Mallick
-Description: Real State Template
+Description: TODO APP
 Version: 1.0.0
-Keywords: real state, Template, bootstrap template etc. 
+Keywords: todo list, task management, task list, todo. 
 
 */
 
@@ -16,10 +16,8 @@ Keywords: real state, Template, bootstrap template etc.
 
 /* ===== STYLE INDEX ===== */
 /* 
-  1. Header Section
-  2. Hero/Banner Section
-  3. Category Section
-  10. Footer Section
+  1. Hero/Banner Section
+  2. Input Field + Todo List
   */
 /* ===== STYLE INDEX ===== */
 
@@ -41,14 +39,15 @@ body {
   font-family: 'Russo One', sans-serif;
 }
 
-.info p {
+.info p,
+.into h2 {
   font-size: 18px;
 }
 
 .todo-form {
   gap: 1rem;
-  display: flex;
-  justify-content: center;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .todo-form > input {
@@ -57,28 +56,37 @@ body {
   box-shadow: none;
 }
 
+.todo-form > input:hover {
+  box-shadow: none;
+}
+
 .todo-form > button {
   width: 100%;
   max-width: 5rem;
-  background: #20eeb0;
+  background-color: #20eeb0 !important;
 }
 
 .todo-form > button:focus {
-  border: none;
+  border: none !important;
 }
 
 .todo-form > button:hover {
-  background-color: #19d49c;
+  background-color: #19d49c !important;
 }
 
 .todo-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.todo-item:is(.todo-title, .todo-createAt),
 .todo-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+.todo-title,
+.todo-createAt {
   margin-bottom: 0;
 }
 
