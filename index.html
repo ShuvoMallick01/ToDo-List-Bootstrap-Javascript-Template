@@ -37,73 +37,67 @@
   </head>
 
   <body>
-    <!-- BANNER START -->
-    <section class="">
+    <section>
       <div class="container">
         <div class="row">
-          <div class="col-md-4 m-auto p-0 m-0">
-            <div class="banner position-relative">
-              <img src="./assets/images/banner.png" class="" alt="Banner" />
-              <div class="info position-absolute bottom-0 end-0 p-3 text-end">
-                <p class="text-white mb-0 fw-bold">Thur 9</p>
-                <h2 class="text-white fw-bold mb-0 pb-0">6:23 AM</h2>
+          <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-4">
+            <!-- Banner -->
+            <div class="card border-0">
+              <div class="card-img-top position-relative">
+                <img
+                  src="./assets/images/banner.png"
+                  class="w-100"
+                  alt="Banner"
+                />
+                <!-- Date & Time -->
+                <div class="info position-absolute bottom-0 end-0 p-3 text-end">
+                  <p class="text-white mb-0 fw-bold" id="date">Thur 9</p>
+                  <h2 class="text-white fw-bold mb-0 pb-0" id="time">
+                    6:23 AM
+                  </h2>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- BANNER END -->
 
-    <!-- TO-DO LIST START -->
-    <section class="mt-0 pt-0">
-      <div class="container">
-        <div class="row">
-          <div class="input-todo col-md-4 m-auto bg-white p-4">
-            <!-- Input Field -->
-            <form id="todoForm">
-              <div class="row">
-                <div class="col-md-9 col-9 mb-3">
+              <!-- To do Section -->
+              <div class="card-body">
+                <!-- Input form -->
+                <form id="todo-form">
                   <input
                     type="text"
-                    class="form-control"
-                    id="todoInput"
+                    id="todo-input"
                     placeholder="Note"
+                    class="form-control"
                   />
-                </div>
-                <div class="col-md-3 col-3 ms-0 ps-0 text-end">
                   <button class="btn" type="submit" id="todoInputBtn">
                     <i class="fa-solid fa-plus text-white"></i>
                   </button>
+                </form>
+
+                <!-- To do List  -->
+                <div class="todo mt-4">
+                  <!-- name -->
+                  <div class="todo-item">
+                    <div>
+                      <h5 class="todo-title">Dinner</h5>
+                      <p class="todo-createAt text-muted">Today at 8:00PM</p>
+                    </div>
+
+                    <!-- icons -->
+                    <div class="todo-actions d-flex align-items-center">
+                      <input class="form-check-input" type="checkbox" />
+                      <i
+                        id="edit"
+                        class="fa-solid fa-pen-to-square text-success edit-btn"
+                      ></i>
+                      <i
+                        id="delete"
+                        class="fa-solid fa-trash text-danger delete-btn"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
+                <!-- End Card Body -->
               </div>
-            </form>
-
-            <!--  To-do List -->
-            <div class="row todoLists">
-              <!-- Single Todo -->
-
-              <!-- <div
-                class="todo mt-4 d-flex align-items-center justify-content-between"
-              >
-                <div class="content col-md-8">
-                  <h4 class="mb-0 pb-0 todoText text-decoration-line-through">
-                    Dinner
-                  </h4>
-                  <p class="mb-0 pb-0 text-muted todoDate">Today at 8:00PM</p>
-                </div>
-                <div
-                  class="actionIcons col-md-4 d-flex gap-4 fs-5 mb-0 pb-0 justify-content-end align-items-center"
-                >
-                  <i
-                    class="editTodo fa-solid fa-pen-to-square text-success"
-                  ></i>
-                  <i class="deleteTodo fa-solid fa-trash text-danger"></i>
-                  <input class="form-check-input mb-1" type="checkbox" />
-                </div>
-              </div> -->
-
-              <!-- End ToDo List -->
             </div>
           </div>
         </div>
