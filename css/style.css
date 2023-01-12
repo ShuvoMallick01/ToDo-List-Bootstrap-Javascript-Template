@@ -105,12 +105,15 @@ body {
 
 .todo-actions i {
   font-size: 1.25rem;
+  cursor: pointer;
 }
 
 .todo-actions > input:first-child {
   margin-top: 0;
   width: 1.25rem;
   height: 1.25rem;
+  cursor: pointer;
+  box-shadow: none;
 }
 /* ===== END===== */
 
