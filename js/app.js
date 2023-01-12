@@ -3,6 +3,7 @@ const currentTime = document.getElementById('time');
 const todoForm = document.querySelector('.todo-form');
 const todoInput = document.querySelector('#todo-input');
 const todoListWrapper = document.querySelector('.todo-list');
+const deleteBtnList = document.querySelectorAll('#delete');
 
 // Current Time
 function timeFormat(date) {
@@ -11,7 +12,6 @@ function timeFormat(date) {
     minute: '2-digit',
     hour12: true,
   });
-
   return time;
 }
 
@@ -28,7 +28,9 @@ function currentDateTime() {
   currentTime.textContent = timeFormat(today);
 }
 
-// Create Todo Function
+currentDateTime();
+
+// Create Todo Return Function
 function createTodo(title) {
   return {
     title,
@@ -38,18 +40,15 @@ function createTodo(title) {
   };
 }
 
-currentDateTime();
-
+// To Do Add & Delete
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  //   console.log(e);
-  //   console.log(todoInput.value);
+
   if (!todoInput.value) {
     alert('Toto title is required!');
     return;
   }
 
-  //   to do Value Store
   const newTodo = createTodo(todoInput.value);
   todoInput.value = '';
 
@@ -76,14 +75,11 @@ todoForm.addEventListener('submit', (e) => {
 
   todoListWrapper.innerHTML += markup;
 
-  const deleteBtnList = document.querySelectorAll('#delete');
-  //   console.log(deleteBtnList);
-
+  //   Delete Todo
   deleteBtnList.forEach((element) => {
     element.addEventListener('click', (e) => {
       const todoItem = element.closest('.todo-item');
-      //   todoItem.style.display = 'none';
-      console.log(todoItem.style);
+      todoItem.style.display = 'none';
     });
   });
 });
