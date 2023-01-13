@@ -99,4 +99,14 @@ todoForm.addEventListener('submit', (e) => {
       }
     });
   });
+
+  // Edit Todo
+  const editTodo = document.querySelectorAll('#edit');
+  // console.log(editTodo);
+  editTodo.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      // todoInput.value = editTodo.innerText;
+      console.log(editTodo.innertext);
+    });
+  });
 });
