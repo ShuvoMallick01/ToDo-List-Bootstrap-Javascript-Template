@@ -61,7 +61,7 @@ todoForm.addEventListener('submit', (e) => {
         </div>
 
         <div class="todo-actions d-flex align-items-center">
-          <input class="form-check-input" type="checkbox" />
+          <input id="complete" class="form-check-input" type="checkbox" />
           <i
             id="edit"
             class="fa-solid fa-pen-to-square text-success edit-btn"
@@ -76,10 +76,27 @@ todoForm.addEventListener('submit', (e) => {
   todoListWrapper.innerHTML += markup;
 
   //   Delete Todo
+  const deleteBtnList = document.querySelectorAll('#delete');
+
   deleteBtnList.forEach((element) => {
     element.addEventListener('click', (e) => {
       const todoItem = element.closest('.todo-item');
       todoItem.style.display = 'none';
+    });
+  });
+
+  //Complete Todo
+  const completeCheckList = document.querySelectorAll('#complete');
+
+  completeCheckList.forEach((element) => {
+    element.addEventListener('change', (e) => {
+      if (element.checked) {
+        const todoItem2 = element.closest('.todo-item');
+        todoItem2.style.color = 'gray';
+      } else if (!element.checked) {
+        const todoItem2 = element.closest('.todo-item');
+        todoItem2.style.color = 'black';
+      }
     });
   });
 });
