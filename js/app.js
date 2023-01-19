@@ -5,6 +5,8 @@ const todoInput = document.querySelector('#todo-input');
 const todoListWrapper = document.querySelector('.todo-list');
 const deleteBtnList = document.querySelectorAll('#delete');
 
+let todoList = [];
+
 // Current Time
 function timeFormat(date) {
   const time = date.toLocaleTimeString('en-US', {
@@ -50,7 +52,11 @@ todoForm.addEventListener('submit', (e) => {
   }
 
   const newTodo = createTodo(todoInput.value);
+  todoList.push(newTodo);
+  localStorage.setItem('todoList', JSON.stringify(todoList));
+  // console.log(todoList);
   todoInput.value = '';
+  focusInput();
 
   // Create parent div
   const parentDiv = document.createElement('div');
@@ -67,53 +73,54 @@ todoForm.addEventListener('submit', (e) => {
     new Date(newTodo.createAt)
   )}`;
 
-  // Create second Element
-  const secondElement = document.createElement('div');
-  secondElement.className = 'todo-actions d-flex align-items-center';
-  // Input Element
-  const inputElement = document.createElement('input');
-  inputElement.type = 'checkbox';
-  inputElement.className = 'form-check-input';
-  inputElement.id = 'complete';
-  // Edit icon Element
-  const editIconElement = document.createElement('i');
-  editIconElement.id = 'edit';
-  editIconElement.classList = 'fa-solid fa-pen-to-square text-success edit-btn';
-  // Delete icon Element
-  const deleteIconElement = document.createElement('i');
-  deleteIconElement.id = 'delete';
-  deleteIconElement.classList = 'fa-solid fa-trash text-danger delete-btn';
+  // // Create second Element
+  // const secondElement = document.createElement('div');
+  // secondElement.className = 'todo-actions d-flex align-items-center';
+  // // Input Element
+  // const inputElement = document.createElement('input');
+  // inputElement.type = 'checkbox';
+  // inputElement.className = 'form-check-input';
+  // inputElement.id = 'complete';
+  // // Edit icon Element
+  // const editIconElement = document.createElement('i');
+  // editIconElement.id = 'edit';
+  // editIconElement.classList = 'fa-solid fa-pen-to-square text-success edit-btn';
+  // // Delete icon Element
+  // const deleteIconElement = document.createElement('i');
+  // deleteIconElement.id = 'delete';
+  // deleteIconElement.classList = 'fa-solid fa-trash text-danger delete-btn';
 
-  // append element
-  firstElement.append(titleElement, dateElement);
-  secondElement.append(inputElement, editIconElement, deleteIconElement);
-  parentDiv.append(firstElement, secondElement);
+  // // append element
+  // firstElement.append(titleElement, dateElement);
+  // secondElement.append(inputElement, editIconElement, deleteIconElement);
+  // parentDiv.append(firstElement, secondElement);
 
-  todoListWrapper.append(parentDiv);
+  // todoListWrapper.append(parentDiv);
 
   // html markup
-  // const markup = `<div class="todo-item">
-  //       <div>
-  //         <h5 class="todo-title">${newTodo.title}</h5>
-  //         <p class="todo-createAt text-muted">Today at ${timeFormat(
-  //           new Date(newTodo.createAt)
-  //         )}</p>
-  //       </div>
+  const markup = `<div class="todo-item">
+        <div>
+          <h5 class="todo-title">${newTodo.title}</h5>
+          <p class="todo-createAt text-muted">Today at ${timeFormat(
+            new Date(newTodo.createAt)
+          )}</p>
+        </div>
 
-  //       <div class="todo-actions d-flex align-items-center">
-  //         <input id="complete" class="form-check-input" type="checkbox" />
-  //         <i
-  //           id="edit"
-  //           class="fa-solid fa-pen-to-square text-success edit-btn"
-  //         ></i>
-  //         <i
-  //           id="delete"
-  //           class="fa-solid fa-trash text-danger delete-btn"
-  //         ></i>
-  //       </div>
-  //   </div>`;
+        <div class="todo-actions d-flex align-items-center">
+          <input id="complete" class="form-check-input" type="checkbox" />
+          <i
+            id="edit"
+            class="fa-solid fa-pen-to-square text-success edit-btn"
+          ></i>
+          <i
+            id="delete"
+            class="fa-solid fa-trash text-danger delete-btn"
+          ></i>
+        </div>
+    </div>`;
 
-  // todoListWrapper.innerHTML += markup;
+  todoListWrapper.innerHTML += markup;
+  todoListWrapper.insertAdjacentHTML('afterbegin', markup);
 
   // Delete Todo
   const deleteBtnList = document.querySelectorAll('#delete');
@@ -151,4 +158,15 @@ todoForm.addEventListener('submit', (e) => {
       // console.log(e);
     });
   });
+});
+
+// Focus Cursor Into Input Field
+function focusInput() {
+  todoInput.addEventListener('focus', () => {
+    console.log('focus');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', (e) => {
+  console.log(localStorage.getItem('todoList'));
 });
