@@ -7,7 +7,7 @@ const deleteBtnList = document.querySelectorAll('#delete');
 
 let todoList = [];
 
-// Current Time
+// Time
 function timeFormat(date) {
   const time = date.toLocaleTimeString('en-US', {
     hour: '2-digit',
@@ -17,7 +17,7 @@ function timeFormat(date) {
   return time;
 }
 
-// Current Date & Time
+// Date & Time
 function currentDateTime() {
   const today = new Date();
 
@@ -29,7 +29,6 @@ function currentDateTime() {
   currentDay.textContent = date;
   currentTime.textContent = timeFormat(today);
 }
-
 currentDateTime();
 
 // Create Todo Return Function
@@ -42,131 +41,202 @@ function createTodo(title) {
   };
 }
 
-// To Do Add & Delete
+// Render UI
+function renderUI() {
+  let markup = '';
+  todoList.forEach((item) => {
+    markup += `<div class="todo-item">
+         <div class=${item.complete ? 'text-decoration-line-through' : ''}>
+           <h5 class="todo-title">${item.title}</h5>
+           <p class="todo-createAt text-muted">Today at ${timeFormat(
+             new Date(item.createAt)
+           )}</p>
+         </div>
+         <div class="todo-actions d-flex align-items-center">
+           <input id="complete" onchange="completeTodo(${item.id})" ${
+      item.complete && 'checked'
+    } class="form-check-input" type="checkbox"/>
+           <i id="edit" class="fa-solid fa-pen-to-square text-success edit-btn"></i>
+           <i id="delete" onclick="deleteTodo(${
+             item.id
+           })" class="fa-solid fa-trash text-danger delete-btn"></i>
+         </div>
+       </div>`;
+  });
+
+  todoListWrapper.innerHTML = markup;
+}
+
+// Delete Todo
+function deleteTodo(id) {
+  const result = confirm('Are you want to delete this Todo?');
+
+  if (result) {
+    todoList = todoList.filter((item) => item.id !== id);
+    localStorage.setItem('todos', JSON.stringify(todoList));
+    renderUI();
+  } else {
+  }
+}
+
+// Complete Todo
+function completeTodo(id) {
+  todoList = todoList.map((item) => {
+    if (item.id === id) return { ...item, complete: !item.complete };
+    return item;
+  });
+
+  localStorage.setItem('todos', JSON.stringify(todoList));
+
+  renderUI();
+}
+
+// Main Function
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  if (!todoInput.value) {
-    alert('Toto title is required!');
+  let inputValue = todoInput.value;
+
+  if (!inputValue) {
+    alert('Title is required!');
     return;
   }
 
-  const newTodo = createTodo(todoInput.value);
+  const newTodo = createTodo(inputValue);
   todoList.push(newTodo);
-  localStorage.setItem('todoList', JSON.stringify(todoList));
-  // console.log(todoList);
+
+  localStorage.setItem('todos', JSON.stringify(todoList));
+
+  renderUI();
   todoInput.value = '';
-  focusInput();
-
-  // Create parent div
-  const parentDiv = document.createElement('div');
-  parentDiv.className = 'todo-item';
-  // Create First title
-  const firstElement = document.createElement('div');
-  const titleElement = document.createElement('h5');
-  titleElement.className = 'todo-title';
-  titleElement.textContent = newTodo.title;
-  // Create Time
-  const dateElement = document.createElement('p');
-  dateElement.className = 'todo-createAt text-muted';
-  dateElement.textContent = `Today at ${timeFormat(
-    new Date(newTodo.createAt)
-  )}`;
-
-  // // Create second Element
-  // const secondElement = document.createElement('div');
-  // secondElement.className = 'todo-actions d-flex align-items-center';
-  // // Input Element
-  // const inputElement = document.createElement('input');
-  // inputElement.type = 'checkbox';
-  // inputElement.className = 'form-check-input';
-  // inputElement.id = 'complete';
-  // // Edit icon Element
-  // const editIconElement = document.createElement('i');
-  // editIconElement.id = 'edit';
-  // editIconElement.classList = 'fa-solid fa-pen-to-square text-success edit-btn';
-  // // Delete icon Element
-  // const deleteIconElement = document.createElement('i');
-  // deleteIconElement.id = 'delete';
-  // deleteIconElement.classList = 'fa-solid fa-trash text-danger delete-btn';
-
-  // // append element
-  // firstElement.append(titleElement, dateElement);
-  // secondElement.append(inputElement, editIconElement, deleteIconElement);
-  // parentDiv.append(firstElement, secondElement);
-
-  // todoListWrapper.append(parentDiv);
-
-  // html markup
-  const markup = `<div class="todo-item">
-        <div>
-          <h5 class="todo-title">${newTodo.title}</h5>
-          <p class="todo-createAt text-muted">Today at ${timeFormat(
-            new Date(newTodo.createAt)
-          )}</p>
-        </div>
-
-        <div class="todo-actions d-flex align-items-center">
-          <input id="complete" class="form-check-input" type="checkbox" />
-          <i
-            id="edit"
-            class="fa-solid fa-pen-to-square text-success edit-btn"
-          ></i>
-          <i
-            id="delete"
-            class="fa-solid fa-trash text-danger delete-btn"
-          ></i>
-        </div>
-    </div>`;
-
-  todoListWrapper.innerHTML += markup;
-  todoListWrapper.insertAdjacentHTML('afterbegin', markup);
-
-  // Delete Todo
-  const deleteBtnList = document.querySelectorAll('#delete');
-
-  deleteBtnList.forEach((element) => {
-    element.addEventListener('click', (e) => {
-      const todoItem = element.closest('.todo-item');
-      todoItem.style.display = 'none';
-    });
-  });
-
-  // Complete Todo
-  const completeCheckList = document.querySelectorAll('#complete');
-
-  completeCheckList.forEach((element) => {
-    element.addEventListener('change', (e) => {
-      if (element.checked) {
-        const todoItem2 = element.closest('.todo-item');
-        todoItem2.style.color = 'gray';
-      } else if (!element.checked) {
-        const todoItem2 = element.closest('.todo-item');
-        todoItem2.style.color = 'black';
-      }
-    });
-  });
-
-  // Edit Todo
-  const editTodo = document.querySelectorAll('#edit');
-  // console.log(editTodo);
-  editTodo.forEach((element) => {
-    element.addEventListener('click', (e) => {
-      // createTodo().title = editTodo.innerText;
-      todoInput.value = createTodo(e.innerHTML);
-      // console.log(editTodo.innertext);
-      // console.log(e);
-    });
-  });
 });
 
-// Focus Cursor Into Input Field
-function focusInput() {
-  todoInput.addEventListener('focus', () => {
-    console.log('focus');
-  });
-}
-
+// Fetch Data From localStorage
 document.addEventListener('DOMContentLoaded', (e) => {
-  console.log(localStorage.getItem('todoList'));
+  // console.log(localStorage.getItem('todoList'));
+  if (localStorage.getItem('todos')) {
+    todoList = JSON.parse(localStorage.getItem('todos'));
+  }
+
+  renderUI();
 });
+
+// // Get Data from Local Storage
+// function renderTodoItem(todoList) {
+//   todoList.forEach((item) => {
+//     const markup = `<div class="todo-item">
+//           <div>
+//             <h5 class="todo-title">${item.title}</h5>
+//             <p class="todo-createAt text-muted">Today at ${timeFormat(
+//               new Date(item.createAt)
+//             )}</p>
+//           </div>
+
+//           <div class="todo-actions d-flex align-items-center">
+//             <input id="complete" class="form-check-input" type="checkbox" />
+//             <i
+//               id="edit"
+//               class="fa-solid fa-pen-to-square text-success edit-btn"
+//             ></i>
+//             <i
+//               id="delete"
+//               class="fa-solid fa-trash text-danger delete-btn"
+//             ></i>
+//           </div>
+//       </div>`;
+
+//     // todoListWrapper.innerHTML += markup;
+//     todoListWrapper.insertAdjacentHTML('afterbegin', markup);
+//   });
+// }
+
+// // To Do Add & Delete
+// todoForm.addEventListener('submit', (e) => {
+//   e.preventDefault();
+
+//   if (!todoInput.value) {
+//     alert('Toto title is required!');
+//     return;
+//   }
+
+//   const newTodo = createTodo(todoInput.value);
+//   todoList.push(newTodo);
+//   localStorage.setItem('todoList', JSON.stringify(todoList));
+//   // console.log(todoList);
+//   todoInput.value = '';
+//   focusInput();
+
+//   const markup = `<div class="todo-item">
+//         <div>
+//           <h5 class="todo-title">${newTodo.title}</h5>
+//           <p class="todo-createAt text-muted">Today at ${timeFormat(
+//             new Date(newTodo.createAt)
+//           )}</p>
+//         </div>
+
+//         <div class="todo-actions d-flex align-items-center">
+//           <input id="complete" class="form-check-input" type="checkbox" />
+//           <i
+//             id="edit"
+//             class="fa-solid fa-pen-to-square text-success edit-btn"
+//           ></i>
+//           <i
+//             id="delete"
+//             class="fa-solid fa-trash text-danger delete-btn"
+//           ></i>
+//         </div>
+//     </div>`;
+
+//   // todoListWrapper.innerHTML += markup;
+//   todoListWrapper.insertAdjacentHTML('afterbegin', markup);
+
+//   // Delete Todo
+//   const deleteBtnList = document.querySelectorAll('#delete');
+
+//   deleteBtnList.forEach((element) => {
+//     element.addEventListener('click', (e) => {
+//       const todoItem = element.closest('.todo-item');
+//       todoItem.style.display = 'none';
+//     });
+//   });
+
+//   // Complete Todo
+//   const completeCheckList = document.querySelectorAll('#complete');
+
+//   completeCheckList.forEach((element) => {
+//     element.addEventListener('change', (e) => {
+//       if (element.checked) {
+//         const todoItem2 = element.closest('.todo-item');
+//         todoItem2.style.color = 'gray';
+//       } else if (!element.checked) {
+//         const todoItem2 = element.closest('.todo-item');
+//         todoItem2.style.color = 'black';
+//       }
+//     });
+//   });
+
+//   // Edit Todo
+//   const editTodo = document.querySelectorAll('#edit');
+//   // console.log(editTodo);
+//   editTodo.forEach((element) => {
+//     element.addEventListener('click', (e) => {
+//       // createTodo().title = editTodo.innerText;
+//       todoInput.value = createTodo(e.innerHTML);
+//       // console.log(editTodo.innertext);
+//       // console.log(e);
+//     });
+//   });
+// });
+
+// // Focus Cursor Into Input Field
+// function focusInput() {
+//   todoInput.addEventListener('focus', () => {
+//     console.log('focus');
+//   });
+// }
+
+// document.addEventListener('DOMContentLoaded', (e) => {
+//   // console.log(localStorage.getItem('todoList'));
+//   const todoList = JSON.parse(localStorage.getItem('todoList'));
+//   renderTodoItem(todoList);
+// });
