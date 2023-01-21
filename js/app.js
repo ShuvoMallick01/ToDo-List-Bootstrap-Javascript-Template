@@ -6,6 +6,7 @@ const todoListWrapper = document.querySelector('.todo-list');
 const deleteBtnList = document.querySelectorAll('#delete');
 
 let todoList = [];
+let editId = null;
 
 // Time
 function timeFormat(date) {
@@ -52,11 +53,14 @@ function renderUI() {
              new Date(item.createAt)
            )}</p>
          </div>
+
          <div class="todo-actions d-flex align-items-center">
            <input id="complete" onchange="completeTodo(${item.id})" ${
       item.complete && 'checked'
     } class="form-check-input" type="checkbox"/>
-           <i id="edit" class="fa-solid fa-pen-to-square text-success edit-btn"></i>
+           <i id="edit" onclick="editTodo(${
+             item.id
+           })" class="fa-solid fa-pen-to-square text-success edit-btn"></i>
            <i id="delete" onclick="deleteTodo(${
              item.id
            })" class="fa-solid fa-trash text-danger delete-btn"></i>
@@ -91,19 +95,34 @@ function completeTodo(id) {
   renderUI();
 }
 
+// Edit Todo
+function editTodo(id) {
+  editId = id;
+  const findTodo = todoList.find((item) => item.id === id);
+  todoInput.value = findTodo.title;
+}
+
 // Main Function
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   let inputValue = todoInput.value;
-
+  // check
   if (!inputValue) {
     alert('Title is required!');
     return;
   }
 
-  const newTodo = createTodo(inputValue);
-  todoList.push(newTodo);
+  // edit
+  if (editId) {
+    todoList = todoList.map((item) => {
+      if (item.id === editId) return { ...item, title: inputValue };
+      return item;
+    });
+  } else {
+    const newTodo = createTodo(inputValue);
+    todoList.push(newTodo);
+  }
 
   localStorage.setItem('todos', JSON.stringify(todoList));
 
