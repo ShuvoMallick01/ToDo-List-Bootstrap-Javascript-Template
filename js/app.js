@@ -7,7 +7,11 @@ const todoListWrapper = document.querySelector('.todo-list');
 
 const allTodoLength = document.querySelector('.all-todo-length');
 const openTodoLength = document.querySelector('.open-todo-length');
-const completeTodoLength = document.querySelector('.complate-todo-length');
+const completeTodoLength = document.querySelector('.complete-todo-length');
+
+const allBtn = document.getElementById('all');
+const openBtn = document.getElementById('open');
+const completeBtn = document.getElementById('complete');
 
 let todoList = [];
 let editId = null;
@@ -34,6 +38,7 @@ function currentDateTime() {
   currentDay.textContent = date;
   currentTime.textContent = timeFormat(today);
 }
+
 currentDateTime();
 
 // CREATE TODO PRIMARY FUNCTION
@@ -47,9 +52,9 @@ function createTodo(title) {
 }
 
 // RENDER UI
-function renderUI() {
+function renderUI(todos) {
   let markup = '';
-  todoList.forEach((item) => {
+  todos.forEach((item) => {
     markup += `<div class="todo-item">
          <div class=${item.complete ? 'text-decoration-line-through' : ''}>
            <h5 class="todo-title">${item.title}</h5>
@@ -82,8 +87,8 @@ function deleteTodo(id) {
   if (result) {
     todoList = todoList.filter((item) => item.id !== id);
     localStorage.setItem('todos', JSON.stringify(todoList));
-    renderUI();
-  } else {
+    showLength();
+    renderUI(todoList);
   }
 }
 
@@ -96,7 +101,8 @@ function completeTodo(id) {
 
   localStorage.setItem('todos', JSON.stringify(todoList));
 
-  renderUI();
+  showLength();
+  renderUI(todoList);
 }
 
 // EDIT TODO
@@ -106,23 +112,35 @@ function editTodo(id) {
   todoInput.value = findTodo.title;
 }
 
-// SHOW TODO LENGTH
+// SHOW LENGTH TODO
 function showLength() {
   allTodoLength.textContent = todoList.length;
-  // console.log(todoList.length);
-  // console.log(allTodoLength.textContent);
 
-  allTodoLength.textContent = todoList.filter(
-    (item) => item.complete === false
-  ).length;
-  allTodoLength.textContent = todoList.filter(
-    (item) => item.complete === true
-  ).length;
+  const openTodos = todoList.filter((item) => item.complete === false);
+  openTodoLength.textContent = openTodos.length;
 
-  // console.log(allTodoLength.textContent);
+  const completeTodos = todoList.filter((item) => item.complete === true);
+  completeTodoLength.textContent = completeTodos.length;
 }
 
-// ADD TODO LIST
+// FILTER ALL TODO
+allBtn.addEventListener('click', (e) => {
+  renderUI(todoList);
+});
+
+// FILTER OPEN TODO
+openBtn.addEventListener('click', (e) => {
+  let openTodos = todoList.filter((item) => item.complete === false);
+  renderUI(openTodos);
+});
+
+// FILTER COMPLETE TODO
+completeBtn.addEventListener('click', (e) => {
+  let completeTodos = todoList.filter((item) => item.complete === true);
+  renderUI(completeTodos);
+});
+
+// ADD LIST FUNCTION
 todoForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
@@ -145,8 +163,9 @@ todoForm.addEventListener('submit', (e) => {
   }
 
   localStorage.setItem('todos', JSON.stringify(todoList));
+  showLength();
+  renderUI(todoList);
 
-  renderUI();
   todoInput.value = '';
 });
 
@@ -157,6 +176,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
   }
 
   showLength();
-  console.log(showLength());
-  renderUI();
+  // console.log(showLength());
+  renderUI(todoList);
 });

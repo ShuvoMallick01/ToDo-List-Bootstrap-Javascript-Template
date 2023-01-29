@@ -74,6 +74,13 @@ body {
   background-color: #19d49c !important;
 }
 
+/* filter style */
+.filter-actions button {
+  background-color: transparent;
+  border: none;
+}
+
+/* item style */
 .todo-item {
   display: flex;
   align-items: center;
