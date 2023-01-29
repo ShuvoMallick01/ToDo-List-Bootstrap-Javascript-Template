@@ -1,17 +1,17 @@
-# Title
+#ToDo List Bootstrap Javascript Template
 
 Live Site: https://shuvomallick01.github.io/ToDo-List-Bootstrap-Javascript-Template/
 
 ## Overview
 
-Website Template is a vast and complete HTML5, CSS and Bootstrap Real State template. The eye-catching design and beautiful interface of this template will attract any visitor. You can deal with Ready Made Real State Website, and many more things.
+This template is a vast and complete HTML5, CSS and Bootstrap Todo List App. The eye-catching design and beautiful interface of this template will attract any visitor. You can deal with Ready Made Todo List App and many more things.
 
 ## Tools/Technologies
 
 - HTML/CSS
 - Bootstrap
+- Javascript
 - Google Fonts
-- Font Icons
 - More
 
 ## Features
@@ -26,9 +26,6 @@ Website Template is a vast and complete HTML5, CSS and Bootstrap Real State temp
 ## Web Pages
 
 - Home Page
-- Blog
-- About
-- Contact
 
 ## Support
 
