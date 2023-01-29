@@ -56,8 +56,16 @@ body {
   box-shadow: none;
 }
 
-.todo-form > input:hover {
+.todo-form > input:hover,
+input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.search-input:hover,
+.search-input:focus {
   box-shadow: none;
+  outline: none;
 }
 
 .todo-form > button {

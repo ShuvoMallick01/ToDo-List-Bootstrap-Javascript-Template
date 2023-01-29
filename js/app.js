@@ -13,6 +13,8 @@ const allBtn = document.getElementById('all');
 const openBtn = document.getElementById('open');
 const completeBtn = document.getElementById('complete');
 
+const searchInput = document.getElementById('search');
+
 let todoList = [];
 let editId = null;
 
@@ -138,6 +140,16 @@ openBtn.addEventListener('click', (e) => {
 completeBtn.addEventListener('click', (e) => {
   let completeTodos = todoList.filter((item) => item.complete === true);
   renderUI(completeTodos);
+});
+
+// SEARCH TODO
+searchInput.addEventListener('keyup', (e) => {
+  const searchValue = e.target.value.toLowerCase();
+  let filteredList = todoList.filter((item) =>
+    item.title.toLowerCase().includes(searchValue)
+  );
+
+  renderUI(filteredList);
 });
 
 // ADD LIST FUNCTION
