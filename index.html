@@ -41,8 +41,8 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-4">
-            <!-- Banner -->
             <div class="card border-0">
+              <!-- TOP BANNER IMAGE -->
               <div class="card-img-top position-relative">
                 <img
                   src="./assets/images/banner.png"
@@ -58,8 +58,8 @@
                 </div>
               </div>
 
-              <!-- To do Section -->
               <div class="card-body">
+                <!-- TO DO FORM -->
                 <form class="todo-form">
                   <input
                     type="text"
@@ -72,7 +72,27 @@
                   </button>
                 </form>
 
-                <!-- To Do List -->
+                <!-- FILTER BUTTONS SECTION -->
+                <div
+                  class="d-flex align-items-center justify-content-between mt-3"
+                >
+                  <p class="mb-0 fw-bold text-secondary">Filter:</p>
+                  <div class="filter-actions">
+                    <button class="text-primary" id="all">
+                      All-(<span class="all-todo-length">0</span>)
+                    </button>
+
+                    <button class="text-warning" id="open">
+                      Open-(<span class="open-todo-length">0</span>)
+                    </button>
+
+                    <button class="text-success" id="complete">
+                      Complete-(<span class="complete-todo-length">0</span>)
+                    </button>
+                  </div>
+                </div>
+
+                <!-- TO DO LIST-->
                 <div class="todo-list mt-4">
                   <!-- Single To Do-->
                   <!-- <div class="todo-item">
